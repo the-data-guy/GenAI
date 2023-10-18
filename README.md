@@ -1,6 +1,6 @@
-# Brief description of content
+# Brief description of content in each file
 
-# Google-Cloud/Write_and_Improve_code_with_PALM.ipynb
+## Google-Cloud/Write_and_Improve_code_with_PALM.ipynb
 Use an LLM (PALM) API to check whether it can:
 - write new code (in Python) from scratch
 - improve (e.g. make it more efficient to run) a given piece of (Python) code
@@ -19,3 +19,18 @@ Note: There are two ways of accessing the PALM API..
 2) Run on Vertex AI workbench and use Python SDK.
 
 As a result, I had to make a minor tweak to the code snippet. Links to both options provided as references at the top of the notebook.
+
+## Google-Cloud/Semi_Structured_RAG.ipynb
+Use LLM to extract info from a pdf which contains not just text paragraphs, but tables too.
+
+Reference to original notebook: https://github.com/langchain-ai/langchain/blob/master/cookbook/Semi_Structured_RAG.ipynb
+
+I had to make certain changes to resolve the dependency issues, though:
+- Downgrade the version of 'unstructured' and 'unstructured-inference'
+- Use pip (instead of brew) to install 'tesseract' and 'poppler'
+
+For sure, results seem so much better than the naive, pure-text-chunking based, one-size-fits-all RAG approach. However, there is certainly scope for improvement as not every single response is correct. Probably some tuning of chunking strategy / parameters can help.
+
+url for the Llama-2 paper used in the notebook: https://arxiv.org/pdf/2307.09288.pdf
+
+The LLM API used for this was OpenAI (GPT-3.5-Turbo) and the notebook was run on a GCP Vertex AI workbench notebook instance.
