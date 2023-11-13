@@ -112,8 +112,8 @@ if __name__ == "__main__":
     model.gradient_checkpointing_enable()
     model = prepare_model_for_kbit_training(model)
 
-    config = LoraConfig(
-                        r=16,
+    config = LoraConfig(  # "rank" i.e. dimension of new trainable weight matrices; 
+                        r=16,  # Lower value implies more compression but degraded performance. And vice-versa.
                         task_type=TaskType.SEQ_2_SEQ_LM,
                         inference_mode=False
                        )
@@ -121,8 +121,8 @@ if __name__ == "__main__":
     model = get_peft_model(model, config)
     print_trainable_parameters(model)
     
-    # download the tokenizer too, which will be saved in the model artifact
-    # and used at prediction time
+    # Download the tokenizer too, which will be saved in the model artifact.
+    # (Later on, we would need it for inferencing too.)
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
 
     data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer,
